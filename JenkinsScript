@@ -45,6 +45,12 @@ catch (exc) {
         recipients: "${email_to}",
         sendToIndividuals: true])*/
   echo'Build Working'
+  
+  node {
+    // --- Load the generic pipeline ---
+    checkout scm: [$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/geeth10/TestJenkin.git']]]
+    load 'common-pipeline.groovy'
+}()
  }
  
  // Must re-throw exception to propagate error:
